@@ -1,0 +1,22 @@
+{
+  "name": "SelfieToken AQ-0001",
+  "description": "Quantum-enhanced NFT from Aether Quanta Genesis, tuned to Canon City environmental factors and cosmic weights.",
+  "image": "ipfs://QmYourImageHash",
+  "did": "did:ethr:mumbai:0x9b36F6BC5BdC8FE634811edAE5D5765f8500923b",
+  "attributes": [
+    {"trait_type": "Faceprint Hash", "value": "a1b2c3d4e5f6..."},
+    {"trait_type": "Quantum Coherence", "value": stability_results["coherence"]},
+    {"trait_type": "Entanglement Strength", "value": stability_results["entanglement_strength"]},
+    {"trait_type": "Schumann Resonance", "value": stability_results["schumann_mod"]},
+    {"trait_type": "Solar Wind Speed", "value": f"{stability_results['solar_wind_factor'] * 700 + 300:.0f} km/s"},
+    {"trait_type": "Fractal PoP Validity", "value": cfc_results["pop_results"][-1]["is_valid"] ? "Valid" : "Invalid"},
+    {"trait_type": "Dominant Sign", "value": cfc_results["pop_results"][-1]["dominant_sign"]},
+    {"trait_type": "Location", "value": "Canon City, CO"},
+    {"trait_type": "Superfund Impact", "value": "Low"},
+    {"trait_type": "CFC Visualization", "value": cfc_results["cfc_viz_uri"]}
+  ],
+  "properties": {
+    "quantum_signature": f"QSIG-{hashlib.sha256(str(stability_results['coherence'] + stability_results['entanglement_strength']).encode()).hexdigest()[:8].upper()}",
+    "location": {"lat": 38.4410, "lon": -105.2425}
+  }
+}
