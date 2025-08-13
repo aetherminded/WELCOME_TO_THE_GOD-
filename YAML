@@ -1,0 +1,37 @@
+name: Aether Quanta CI/CD
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install Python dependencies
+        run: pip install qiskit qiskit-aer numpy scipy requests python-dotenv matplotlib
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Node dependencies
+        run: npm install astronomy-engine react react-dom typescript tailwindcss
+      - name: Test AUM Framework
+        run: python backend/aum_framework.py
+      - name: Build React App
+        run: npm run build
+      - name: Deploy to Polygon
+        env:
+          INFURA_URL: ${{ secrets.INFURA_URL }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: npx hardhat run scripts/deploy.js --network mumbai
+      - name: Upload to IPFS
+        env:
+          PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
+          PINATA_SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
+        run: node scripts/upload_to_ipfs.js
